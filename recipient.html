@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Who are we inviting?</title>
+  <link rel="stylesheet" href="css/date.css" />
+  <link rel="stylesheet" href="css/recipient.css" />
+</head>
+<body>
+  <h1>Enter your email address</h1>
+  <form id="emailForm" class="form-group">
+    <input
+      type="email"
+      id="recipientEmail"
+      name="recipientEmail"
+      placeholder="yoursemail@gmail.com"
+      required
+    />
+    <button class="button" type="submit">Send Invitation</button>
+  </form>
+
+  <button class="button" onclick="location.href='lastpage.html'">
+    Continue
+  </button>
+
+  <script type="module">
+    // 1. Import EmailJS SDK từ jsDelivr
+    import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.browser.esm.min.js';
+
+    // 2. Khởi tạo với Public Key của bạn
+    emailjs.init("YNqCWzpnGP1hA0ljBJ");
+
+    // 3. Bắt sự kiện submit
+    document.getElementById('emailForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const toEmail = document.getElementById('recipientEmail').value;
+      const subject = localStorage.getItem('mailSubject') || 'A Gentle Invitation';
+      const body    = localStorage.getItem('mailBody')    || 'Default message body';
+
+      // 4. Gửi email
+      emailjs.send(
+        "service_4vi0bjr",
+        "template_d1lx1vu",
+        { to_email: toEmail, email_subject: subject, email_body: body }
+      )
+      .then(() => window.location.href = 'lastpage.html')
+      .catch(err => {
+        console.error('EmailJS error:', err);
+        alert('Không thể gửi email. Vui lòng thử lại.');
+      });
+    });
+  </script>
+</body>
+</html>
