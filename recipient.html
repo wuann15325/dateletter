@@ -24,28 +24,40 @@
     Continue
   </button>
 
+  <!-- 1. Nhúng config và emailjs -->
+  <script src="config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- 2. Script xử lý -->
   <script>
-    // 2. Khởi tạo với Public Key của bạn
-    emailjs.init(EMAIL_CONFIG.publicKey);
+    document.addEventListener('DOMContentLoaded', function () {
+      // Khởi tạo emailjs với publicKey từ config
+      emailjs.init(EMAIL_CONFIG.publicKey);
 
-    // 3. Bắt sự kiện submit
-    document.getElementById('emailForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const toEmail = document.getElementById('recipientEmail').value;
-      const subject = localStorage.getItem('mailSubject') || 'A Gentle Invitation';
-      const body    = localStorage.getItem('mailBody')    || 'Default message body';
+      // Lắng nghe sự kiện gửi form
+      document.getElementById('emailForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-      // 4. Gửi email
-      emailjs.send(
-        EMAIL_CONFIG.serviceID,
-        EMAIL_CONFIG.templateID,
-        { to_email: toEmail, email_subject: subject, email_body: body }
-      )
-      .then(() => window.location.href = 'lastpage.html')
-      .catch(err => {
-        console.error('EmailJS error:', err);
-        alert('Không thể gửi email. Vui lòng thử lại.');
+        const toEmail = document.getElementById('recipientEmail').value;
+        const subject = localStorage.getItem('mailSubject') || 'A Gentle Invitation';
+        const body    = localStorage.getItem('mailBody')    || 'Default message body';
+
+        emailjs.send(
+          EMAIL_CONFIG.serviceID,
+          EMAIL_CONFIG.templateID,
+          {
+            to_email: toEmail,
+            email_subject: subject,
+            email_body: body
+          }
+        )
+        .then(() => {
+          window.location.href = 'lastpage.html';
+        })
+        .catch(err => {
+          console.error('EmailJS error:', err);
+          alert('Không thể gửi email. Vui lòng thử lại.');
+        });
       });
     });
   </script>
