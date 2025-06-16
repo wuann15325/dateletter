@@ -92,20 +92,12 @@
         document.querySelectorAll('input[name="activities"]:checked')
       ).map(i => i.nextSibling.textContent.trim()).join(', ');
 
-      const subject = 'A Gentle Invitation';
-      const body = 
-`Dear gorgeous,
+      // 2. Lưu vào localStorage để dùng sau
+      localStorage.setItem('activities', activities);
+      localStorage.setItem('startTime', start);
+      localStorage.setItem('endTime', end);
 
-I hope you’re doing well. I would be delighted if you would join me on Wednesday from ${start} to ${end} enjoying ${activities}.
-
-Looking forward to your company.
-
-Warm regards,
-Khiem`;
-
-      localStorage.setItem('mailSubject', subject);
-      localStorage.setItem('mailBody', body);
-      window.location.href = 'recipient.html';
+      window.location.href = 'hungry.html';
     });
   </script>
   </body>

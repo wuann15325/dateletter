@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="css/hungry.css" />
+    <title>Hungry?</title>
+  </head>
+  <body>
+    <h2>We might be hungry, do you want to eat something?</h2>
+    <button class="button" id="yesBtn">Yes</button>
+    <button class="button" id="noBtn">No</button>
+
+    <script>
+      document.getElementById('yesBtn').addEventListener('click', () => {
+        window.location.href = 'food.html';
+      });
+
+      document.getElementById('noBtn').addEventListener('click', () => {
+        localStorage.setItem('food', '');
+        window.location.href = 'recipient.html';
+      });
+    </script>
+  </body>
+</html>

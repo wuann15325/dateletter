@@ -38,17 +38,26 @@
       document.getElementById('emailForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const toEmail = document.getElementById('recipientEmail').value;
-        const subject = localStorage.getItem('mailSubject') || 'A Gentle Invitation';
-        const body    = localStorage.getItem('mailBody')    || 'Default message body';
+        const toEmail    = document.getElementById('recipientEmail').value;
+        const start      = localStorage.getItem('startTime')   || '';
+        const end        = localStorage.getItem('endTime')     || '';
+        const activities = localStorage.getItem('activities')  || '';
+        const food       = localStorage.getItem('food')        || '';
+
+        // Gắn thêm phần food nếu người dùng có chọn
+        let bodyText = `Dear gorgeous,\n\nI hope your week’s going well so far. How about a little midweek escape this Wednesday — from ${start} to ${end} — just the two of us, enjoying ${activities}.`;
+        if (food) {
+          bodyText += `\nIf you're up for it, maybe we can enjoy some ${food} afterwards!`;
+        }
+        bodyText += `\n\nLooking forward to a chill time together.\n\nWarm regards,\nKhiem`;
 
         emailjs.send(
           EMAIL_CONFIG.serviceID,
           EMAIL_CONFIG.templateID,
           {
             to_email: toEmail,
-            email_subject: subject,
-            email_body: body
+            email_subject: 'How About a Midweek Escape?',
+            email_body: bodyText
           }
         )
         .then(() => {

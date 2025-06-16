@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Selection</title>
+    <link rel="stylesheet" href="css/food.css" />
+  </head>
+  <body>
+    <div id="foodquestion">
+      <b>What food would you like to eat?</b>
+    </div>
+
+    <div class="food-selection">
+      <div class="food-item">
+        <img src="food/jollibee.jpg" alt="Burgers, fries and fried chicken" />
+        <label
+          ><input
+            type="checkbox"
+            name="food"
+            value="Burgers, fries and fried chicken"
+          />
+          Jollibee</label
+        >
+      </div>
+      <div class="food-item">
+        <img src="food/koreanfood.jpg" alt="Korean food" />
+        <label
+          ><input type="checkbox" name="food" value="Korean food" /> Korean
+          food</label
+        >
+      </div>
+      <div class="food-item">
+        <img src="food/sushi.jpg" alt="sushi" />
+        <label><input type="checkbox" name="food" value="sushi" /> sushi</label>
+      </div>
+      <div class="food-item">
+        <img src="food/ramen.jpg" alt="ramen" />
+        <label><input type="checkbox" name="food" value="ramen" /> ramen</label>
+      </div>
+    </div>
+    <button class="button" id="foodContinue">
+      Continue
+    </button>
+    <script>
+    document.getElementById('foodContinue').addEventListener('click', () => {
+      const foods = Array.from(
+        document.querySelectorAll('input[name="food"]:checked')
+      ).map(f => f.value).join(', ');
+
+      localStorage.setItem('food', foods);
+      window.location.href = 'recipient.html';
+    });
+    </script>
+  </body>
+</html>
