@@ -27,7 +27,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
     // 2. Khởi tạo với Public Key của bạn
-    emailjs.init("YNqCWzpnGP1hA0ljBJ");
+    emailjs.init("NqCWzpnGP1hA0ljBJ");
 
     // 3. Bắt sự kiện submit
     document.getElementById('emailForm').addEventListener('submit', function(e) {
@@ -39,7 +39,7 @@
       // 4. Gửi email
       emailjs.send(
         "service_4vi0bjr",
-        "template_d1lx1vu",
+        "template_95hfqoq",
         { to_email: toEmail, email_subject: subject, email_body: body }
       )
       .then(() => window.location.href = 'lastpage.html')
